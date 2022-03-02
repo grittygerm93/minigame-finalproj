@@ -23,7 +23,8 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
     //    this enables you to access the resource if you have the right authority.. access token needs to be sent as header
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if (request.getServletPath().equals("/api/login") || request.getServletPath().equals("/api/token/refresh")) {
+        if (request.getServletPath().equals("/api/login") || request.getServletPath().equals("/api/token/refresh")
+                || request.getServletPath().equals("/api/register") || request.getServletPath().equals("/api/verify")) {
             filterChain.doFilter(request, response);
         } else {
             String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
@@ -41,7 +42,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                     response.setStatus(HttpStatus.FORBIDDEN.value());
 
                     JsonObjectBuilder objectBuilder = Json.createObjectBuilder()
-                            .add("eror_message", e.getMessage());
+                            .add("error_message", e.getMessage());
                     response.setContentType(MediaType.APPLICATION_JSON_VALUE);
                     response.getOutputStream().write(objectBuilder.build().toString().getBytes());
                 }

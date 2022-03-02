@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SampleService} from "./sample.service";
+import {HttpClient} from "@angular/common/http";
 
 
 @Component({
@@ -9,18 +10,21 @@ import {SampleService} from "./sample.service";
 })
 export class AppComponent implements OnInit{
 
-  alive: boolean = false;
+  // alive: boolean = false;
+  //
+  // constructor(private http: HttpClient) {
+  // }
 
-  constructor(private sampleSvc: SampleService) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.sampleSvc.isAlive().subscribe(res => {
+/*    this.sampleSvc.isAlive().subscribe(res => {
       console.log(res);
       if (res) {
         this.alive = true;
       }
-    })
+    })*/
   }
 
 

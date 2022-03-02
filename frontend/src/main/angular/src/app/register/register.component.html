@@ -1,0 +1,29 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <div>
+    <label>Email:</label>
+    <input type="email" formControlName="email">
+  </div>
+  <div>
+    <label>Username:</label>
+    <input type="text" formControlName="username">
+  </div>
+  <div>
+    <label>password:</label>
+    <input type="password" formControlName="password">
+  </div>
+  <button type="submit">register</button>
+</form>
+<hr>
+<form (ngSubmit)="onSubmitVerify()" [formGroup]="formVerify">
+  <div>
+    <label>Email:</label>
+    <input type="email" formControlName="email">
+  </div>
+  <div>
+    <label>pin:</label>
+    <input type="text" formControlName="verifyId">
+  </div>
+  <button type="submit">verify</button>
+</form>
+
+

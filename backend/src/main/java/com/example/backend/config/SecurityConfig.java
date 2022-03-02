@@ -36,13 +36,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 //        customauthentication filter extends usernamepasswordauthenticationfilter which has /login inside that permits all..
 
-//        to define your own login page..
+//        to define your own login page.. only /api/login will be redirected inside here and returns from there
         CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager());
         customAuthenticationFilter.setFilterProcessesUrl("/api/login");
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//        order is important least restrictive at the top
-        http.authorizeRequests().antMatchers("/api/login/**", "/api/token/refresh/**").permitAll();
+//        order is important least restrictive at the top.. those with permitall will ignore the customauthorizationfilter
+        http.authorizeRequests().antMatchers("/api/login/**", "/api/token/refresh/**", "/api/register/**", "/api/verify/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/save/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
