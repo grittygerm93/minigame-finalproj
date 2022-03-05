@@ -24,9 +24,17 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         if (request.getServletPath().equals("/api/login") || request.getServletPath().equals("/api/token/refresh")
-                || request.getServletPath().equals("/api/register") || request.getServletPath().equals("/api/verify")) {
+                || request.getServletPath().equals("/api/register") || request.getServletPath().equals("/api/verify")
+//                || request.getServletPath().equals("/our-websocket") || request.getServletPath().equals("/topic/receivemsg")
+//                || request.getServletPath().equals("/ws/sendmessage")
+        ) {
             filterChain.doFilter(request, response);
         } else {
+
+//            String authorizationHeader = "Bearer " + request.getParameter("jwt");
+//            if (authorizationHeader == null) {
+//                authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+//            }
             String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
             if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
                 try {

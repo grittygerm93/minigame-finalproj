@@ -1,0 +1,23 @@
+<div id="main-content" class="container">
+
+
+  <label>WebSocket connection:</label>
+  <button (click)="connect()" class="btn btn-default" type="button">Connect</button>
+  <button (click)="disconnect()" class="btn btn-default" type="button" [disabled]="isConnected">Disconnect</button>
+
+  <div class="col-md-6">
+    <form (ngSubmit)="sendMessage()" [formGroup]="form">
+      <div>
+        <label>message:</label>
+        <input type="text" formControlName="message">
+      </div>
+      <button type="submit">send</button>
+    </form>
+  </div>
+
+  <li *ngFor="let msg of receivedMsgs">
+    <ul>{{msg}}</ul>
+  </li>
+
+</div>
+

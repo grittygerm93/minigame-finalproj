@@ -41,7 +41,7 @@ export class AuthService {
   getAllUsers() {
     this.http.get('/api/users', {observe: 'response'})
       .subscribe(resp => {
-
+        console.log(resp);
       }, error => {
         const errorMsg: string = error.error['error_message'];
         if (errorMsg.includes("expired")) {
@@ -88,10 +88,20 @@ export class AuthService {
         });
   }
 
+  getToken() {
+    return sessionStorage.getItem('access-token');
+  //  todo handle expired token??
+  }
+
   private errorPage(error) {
     console.log(error.error['error_message'])
     this.errorMsg = error.error['error_message'];
     this.authObs.next(error);
     this.router.navigate(['/badrequest']);
   }
+
+  // setRefreshToken() {
+  //   //
+  //   sessionStorage.setItem('access-token', sessionStorage.getItem('refresh-token'));
+  // }
 }

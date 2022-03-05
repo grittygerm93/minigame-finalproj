@@ -5,12 +5,14 @@ import {AuthenticationGuard} from "./authentication.guard";
 import {LoginComponent} from "./login/login.component";
 import {BadreqComponent} from "./badreq/badreq.component";
 import {RegisterComponent} from "./register/register.component";
+import {MainComponent} from "./main/main.component";
 
 const routes: Routes = [
 
   {
     path: '', canActivate: [AuthenticationGuard], children: [
-      {path: '', component: HomeComponent},
+      {path: '', component: MainComponent},
+      {path: 'home', component: HomeComponent},
       {path: 'register', component: RegisterComponent},
       {path: 'login', component: LoginComponent},
       {path: 'badrequest', component: BadreqComponent},

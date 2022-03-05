@@ -5,6 +5,8 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.backend.entity.Role;
+import com.example.backend.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,6 +22,8 @@ import java.util.stream.Collectors;
 public class JwtUtil {
 
     private static Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+//    @Autowired
+//    private static UserService userService;
 
     public static String createFirstAccessToken(User user, HttpServletRequest request) {
         return JWT.create()
@@ -42,7 +46,7 @@ public class JwtUtil {
         String token = authorizationHeader.substring("Bearer ".length());
 //        Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
         JWTVerifier verifier = JWT.require(algorithm).build();
-        DecodedJWT decodedJWT = verifier.verify(token);
+        DecodedJWT decodedJWT = verifier.verify(token);;
         String username = decodedJWT.getSubject();
         String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
@@ -66,5 +70,28 @@ public class JwtUtil {
                 .sign(algorithm);
     }
 
+//todo handle the refresh token case
+   /* public static UsernamePasswordAuthenticationToken createAuthorizationTokenForWS(String jwt, String jwtRefresh) {
+        String token = jwt.substring("Bearer ".length());
+//        Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+        JWTVerifier verifier = JWT.require(algorithm).build();
+        DecodedJWT decodedJWT = null;
+        try {
+            decodedJWT = verifier.verify(token);
+        } catch (Exception e) {
+            String username = getUsernameFromRefreshToken(jwtRefresh);
 
+//                check if user really exists in our system
+//                no verification is needed..
+            com.example.backend.entity.User user = userService.getUser(username);
+            String access_token = JwtUtil.createAccessTokenAgain(user, request);
+//            System.out.println(e);
+        }
+        String username = decodedJWT.getSubject();
+        String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        Arrays.stream(roles).forEach(role ->
+                authorities.add(new SimpleGrantedAuthority(role)));
+        return new UsernamePasswordAuthenticationToken(username, null, authorities);
+    }*/
 }

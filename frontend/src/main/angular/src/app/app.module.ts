@@ -11,6 +11,7 @@ import {RequestInterceptor} from "./request.interceptor";
 import {ReactiveFormsModule} from "@angular/forms";
 import { BadreqComponent } from './badreq/badreq.component';
 import { RegisterComponent } from './register/register.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { RegisterComponent } from './register/register.component';
     LoginComponent,
     HomeComponent,
     BadreqComponent,
-    RegisterComponent
+    RegisterComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
