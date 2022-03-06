@@ -12,6 +12,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { BadreqComponent } from './badreq/badreq.component';
 import { RegisterComponent } from './register/register.component';
 import { MainComponent } from './main/main.component';
+import { GameComponent } from './game/game.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MainComponent } from './main/main.component';
     HomeComponent,
     BadreqComponent,
     RegisterComponent,
-    MainComponent
+    MainComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,

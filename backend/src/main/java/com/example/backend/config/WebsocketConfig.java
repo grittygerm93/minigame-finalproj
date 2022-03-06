@@ -19,6 +19,7 @@ public class WebsocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/our-websocket").setAllowedOrigins("http://localhost:4200").withSockJS();
+        registry.addEndpoint("/gamews").setAllowedOrigins("http://localhost:4200").withSockJS();
 //        registry.addEndpoint("/our-websocket");
 //        https://stackoverflow.com/questions/67920378/spring-boot-websocket-without-sockjs
     }
@@ -26,7 +27,8 @@ public class WebsocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         registry.enableSimpleBroker("/topic");
-        registry.setApplicationDestinationPrefixes("/ws");
+        registry.setApplicationDestinationPrefixes("/ws", "/gamews");
+//        registry.setApplicationDestinationPrefixes("/gamews");
     }
 
     @Override

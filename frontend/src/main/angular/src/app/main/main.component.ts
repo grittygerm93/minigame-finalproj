@@ -13,6 +13,7 @@ import {AuthService} from "../auth.service";
 })
 export class MainComponent implements OnInit {
 
+  //proxy config doesnt work here..
   webSocketEndPoint: string = 'http://localhost:8080/our-websocket';
   topic: string = "/topic/receivemsg";
   stompClient: any;
