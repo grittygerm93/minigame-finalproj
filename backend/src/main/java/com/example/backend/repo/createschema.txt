@@ -1,0 +1,78 @@
+   drop table if exists google_api;
+
+    drop table if exists role;
+
+
+    drop table if exists user;
+
+
+    drop table if exists user_roles;
+
+
+    drop table if exists verifyid;
+
+
+    create table google_api (
+       id bigint not null auto_increment,
+        stored_credential BLOB,
+        primary key (id)
+    ) engine=InnoDB;
+
+
+    create table role (
+       id bigint not null auto_increment,
+        name varchar(255),
+        primary key (id)
+    ) engine=InnoDB;
+
+
+    create table user (
+       id bigint not null auto_increment,
+        email varchar(255),
+        enabled bit not null,
+        password varchar(255),
+        username varchar(255),
+        googleapi_id bigint,
+        primary key (id)
+    ) engine=InnoDB;
+
+
+    create table user_roles (
+    id bigint not null auto_increment,
+       user_id bigint not null,
+        roles_id bigint not null,
+        primary key (id)
+    ) engine=InnoDB;
+
+
+    create table verifyid (
+       id bigint not null auto_increment,
+        expiration_time datetime(6),
+        verify_id varchar(255),
+        user_id bigint not null,
+        primary key (id)
+    ) engine=InnoDB;
+
+
+    alter table user
+       add constraint FKod98j1ac18c3hl6gcnwm5551i
+       foreign key (googleapi_id)
+       references google_api (id);
+
+
+    alter table user_roles
+       add constraint FKj9553ass9uctjrmh0gkqsmv0d
+       foreign key (roles_id)
+       references role (id);
+
+
+    alter table user_roles
+       add constraint FK55itppkw3i07do3h7qoclqd4k
+       foreign key (user_id)
+       references user (id);
+
+
+    alter table verifyid
+       add constraint FK_USER_VERIFY_TOKEN
+       foreign key (user_id)
+       references user (id);

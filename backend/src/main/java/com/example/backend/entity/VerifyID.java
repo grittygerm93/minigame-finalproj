@@ -16,7 +16,7 @@ public class VerifyID {
 //    private final int EXPIRATION_TIME = 5;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String verifyId;
     private LocalDateTime expirationTime;

@@ -19,6 +19,8 @@ public class WebsocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/our-websocket").setAllowedOrigins("http://localhost:4200").withSockJS();
+//        registry.addEndpoint("/our-websocket").setAllowedOrigins("https://minigame-fp.herokuapp.com").withSockJS();
+
 //        registry.addEndpoint("/gamews").setAllowedOrigins("http://localhost:4200").withSockJS();
 //        registry.addEndpoint("/our-websocket");
 //        https://stackoverflow.com/questions/67920378/spring-boot-websocket-without-sockjs

@@ -92,7 +92,7 @@ export class AuthService {
 
   getToken() {
     return sessionStorage.getItem('access-token');
-  //  todo handle expired token??
+    //  todo handle expired token??
   }
 
   private errorPage(error) {
@@ -109,16 +109,18 @@ export class AuthService {
   authorizeGoogleOauth() {
     // const headers = {responseType: 'text'}
     let params = new HttpParams()
-      .set('redirectUrl', 'http://localhost:4200/share');
+      // .set('redirectUrl', 'https://minigame-fp.herokuapp.com/share');
+    .set('redirectUrl', 'http://localhost:4200/share');
     console.log(params.toString())
     this.http.get<link>('/api/authorizationCode', {params}).subscribe(resp => {
       window.location.href = resp.link;
-    //  todo make the oauthauthorize trigger on it's own...
+      //  todo make the oauthauthorize trigger on it's own...
     });
   }
 
   oauthAuthorize(code: any) {
     const body = {code: code, redirectUrl: 'http://localhost:4200/share'}
+    // const body = {code: code, redirectUrl: 'https://minigame-fp.herokuapp.com/share'}
     return this.http.post<link1>('/api/token',
       body)
   }
