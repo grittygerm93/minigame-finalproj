@@ -1,3 +1,4 @@
+/*
 package com.example.backend.model.game;
 
 import lombok.Data;
@@ -9,3 +10,4 @@ public class GameStats {
     private HashMap<String, PlayerStats> playersStats = new HashMap<>();
     private int numPlayers;
 }
+*/

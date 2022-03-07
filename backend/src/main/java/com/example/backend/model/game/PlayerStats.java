@@ -1,3 +1,4 @@
+/*
 package com.example.backend.model.game;
 
 import lombok.Data;
@@ -10,3 +11,4 @@ public class PlayerStats {
     String playerId = null;
 }
 
+*/

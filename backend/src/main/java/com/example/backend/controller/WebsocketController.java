@@ -1,13 +1,10 @@
 package com.example.backend.controller;
 
-import com.example.backend.model.game.PlayerStats;
-import com.example.backend.service.websocket.GameService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.util.HtmlUtils;
 
 //@RestController
@@ -16,11 +13,11 @@ import org.springframework.web.util.HtmlUtils;
 public class WebsocketController {
 
     private final SimpMessagingTemplate messagingTemplate;
-    private GameService gameService;
+//    private GameService gameService;
 
-    public WebsocketController(SimpMessagingTemplate messagingTemplate, GameService gameService) {
+    public WebsocketController(SimpMessagingTemplate messagingTemplate) {
         this.messagingTemplate = messagingTemplate;
-        this.gameService = gameService;
+//        this.gameService = gameService;
     }
 
     //    labelling from perspective of client
@@ -32,7 +29,7 @@ public class WebsocketController {
         return HtmlUtils.htmlEscape(message);
     }
 
-    @MessageMapping("/gameid")
+    /*@MessageMapping("/gameid")
     public void gameInit(final String gameId) throws InterruptedException {
         log.info("a new player connected");
         PlayerStats playerStats = new PlayerStats();
@@ -48,7 +45,7 @@ public class WebsocketController {
 //        }
 
 //        messagingTemplate.convertAndSend("/topic/currentPlayers", message);
-//        messagingTemplate.convertAndSend("/topic/newPlayer", message);
-    }
+//        messagingTemplate.convertAndSend("/topic/newPlayer", message);*/
+//    }
 }
 

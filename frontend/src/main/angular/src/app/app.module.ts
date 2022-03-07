@@ -13,6 +13,7 @@ import { BadreqComponent } from './badreq/badreq.component';
 import { RegisterComponent } from './register/register.component';
 import { MainComponent } from './main/main.component';
 import { GameComponent } from './game/game.component';
+import {GameScene, SingleplayergameComponent} from './singleplayergame/singleplayergame.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { GameComponent } from './game/game.component';
     BadreqComponent,
     RegisterComponent,
     MainComponent,
-    GameComponent
+    GameComponent,
+    SingleplayergameComponent,
   ],
   imports: [
     BrowserModule,

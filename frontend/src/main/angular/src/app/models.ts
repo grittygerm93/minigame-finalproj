@@ -3,6 +3,7 @@ export class tokens {
   refresh_token: string;
 }
 
+//NOT USED
 export class gamestats {
   numPlayers: number;
   playersStats: Map<string, playerstats>;
