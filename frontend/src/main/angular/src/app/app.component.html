@@ -1,3 +1,15 @@
-<!--<p *ngIf="alive">Backend alive</p>-->
-<!--<p>testtest</p>-->
+<mat-toolbar color="primary" fxLayout fxLayoutGap="15px" style="margin-bottom: 15px">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" routerLink='/home'>
+    <mat-icon>home</mat-icon>
+  </button>
+  <span>mini game</span>
+  <span fxFlex></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" routerLink='/register'>
+    Register
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" routerLink='/login'>
+    Login
+  </button>
+</mat-toolbar>
+
 <router-outlet></router-outlet>

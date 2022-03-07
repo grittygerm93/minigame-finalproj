@@ -13,7 +13,14 @@ export class HomeComponent implements OnInit {
   constructor(private authSvc: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.authSvc.getAllUsers();
+    // this.authSvc.getAllUsers();
   }
 
+  triggerOauth() {
+    this.authSvc.authorizeGoogleOauth()
+      // .subscribe((resp) => {
+    //   console.log(resp.link);
+    //   window.location.href = resp.link;
+    // });
+  }
 }

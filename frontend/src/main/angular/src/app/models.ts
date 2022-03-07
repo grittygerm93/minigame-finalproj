@@ -3,6 +3,32 @@ export class tokens {
   refresh_token: string;
 }
 
+export class link {
+  link: string
+}
+
+export class link1 {
+  accessToken: string
+}
+
+export class chatmessage {
+
+  constructor(message: string, user: string) {
+    this.message = message;
+    this.user = user;
+  }
+
+  message: string;
+  user: string;
+}
+
+export class simpleperson {
+  name: string;
+  email: string;
+  photoURL: string;
+}
+
+
 //NOT USED
 export class gamestats {
   numPlayers: number;
@@ -15,3 +41,4 @@ export class playerstats {
   y: number;
   playerId: string;
 }
+

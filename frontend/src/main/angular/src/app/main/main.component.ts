@@ -5,6 +5,8 @@ import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 // import { MainComponent } from "./main.component";
 import {AuthService} from "../auth.service";
+import {GameService} from "../singleplayergame/gameservice.service";
+import {chatmessage} from "../models";
 
 @Component({
   selector: 'app-main',
@@ -20,14 +22,19 @@ export class MainComponent implements OnInit {
 
   // webSocketAPI: WebSocketApi;
   form: FormGroup;
-  receivedMsgs: string[] = [];
+  receivedMsgs: chatmessage[] = [];
   isConnected: boolean = false;
+  oldScores: {score: string, time: Date}[] = [];
+  user: string;
 
 
-  constructor(private fb: FormBuilder, private authSvc: AuthService) {
+  constructor(private fb: FormBuilder, private authSvc: AuthService, private gameSvc: GameService) {
     this.form = this.fb.group({
       "message": this.fb.control("default msg"),
     });
+    this.gameSvc.Sub.subscribe((score: string) =>
+      this.oldScores.push({score: score, time: new Date()}));
+    this.user = authSvc.user;
   }
 
   ngOnInit() {
@@ -38,12 +45,15 @@ export class MainComponent implements OnInit {
     console.log(message);
     console.log("sending out message over websocket");
     // this.stompClient.send("/ws/sendmessage", {}, JSON.stringify(message));
-    this.stompClient.send("/ws/sendmessage", {}, message);
+    const chatmsg = message + '|' + this.user;
+    console.log(chatmsg)
+    this.stompClient.send("/ws/sendmessage", {}, chatmsg);
   }
 
   handleMessage(message){
     console.log("Message Recieved from Server :: " + message);
-    this.receivedMsgs.push(message.body);
+    const newMsg = JSON.parse(message.body);
+    this.receivedMsgs.push(newMsg);
   }
 
   connect() {

@@ -1,11 +1,11 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="form">
-  <div>
-    <label>Username:</label>
-    <input type="text" formControlName="username">
-  </div>
-  <div>
-    <label>password:</label>
-    <input type="password" formControlName="password">
-  </div>
-  <button type="submit">Login</button>
+<form (ngSubmit)="onSubmit()" [formGroup]="form" fxLayout="column" fxLayoutAlign="center center">
+  <mat-form-field appearance="fill">
+    <mat-label>Username</mat-label>
+    <input matInput formControlName="username">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>password</mat-label>
+    <input matInput formControlName="password">
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">Login</button>
 </form>

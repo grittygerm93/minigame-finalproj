@@ -1,11 +1,17 @@
 package com.example.backend.controller;
 
+import com.example.backend.model.ChatMessage;
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonReader;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.util.HtmlUtils;
+
+import java.io.ByteArrayInputStream;
 
 //@RestController
 @Slf4j
@@ -20,14 +26,36 @@ public class WebsocketController {
 //        this.gameService = gameService;
     }
 
-    //    labelling from perspective of client
+    //   some unknown stuff going on during the interception.. only able to send simple string
     @MessageMapping("/sendmessage")
     @SendTo("/topic/receivemsg")
-    public String getMessage(final String message) throws InterruptedException {
+    public void getMessage(String message) throws InterruptedException {
         log.info(message);
-//        messagingTemplate.convertAndSend("/topic/receivemsg", message);
-        return HtmlUtils.htmlEscape(message);
+        String[] msgContent = message.split("\\|");
+        String msg = msgContent[0];
+        String user = msgContent[1];
+//        message = HtmlUtils.htmlEscape(message);
+//        JsonReader reader = Json.createReader(new ByteArrayInputStream(message.getBytes()));
+//        log.info(String.valueOf(reader.readArray().size()));
+//        JsonObject msg = reader.readObject().getJsonObject("message");
+//        JsonObject user = reader.readObject().getJsonObject("user");
+//        log.info(user.toString());
+//        log.info(msg.toString());
+
+        messagingTemplate.convertAndSend("/topic/receivemsg", new ChatMessage(msg, user));
+//        return HtmlUtils.htmlEscape(message);
     }
+
+/*    //    labelling from perspective of client
+    @MessageMapping("/sendmessage")
+//    @SendTo("/topic/receivemsg")
+    public void getMessage(final ChatMessage chatMessage) throws InterruptedException {
+        log.info(chatMessage.toString());
+        messagingTemplate.convertAndSend("/topic/receivemsg", chatMessage);
+//        return HtmlUtils.htmlEscape(message);
+    }*/
+
+
 
     /*@MessageMapping("/gameid")
     public void gameInit(final String gameId) throws InterruptedException {

@@ -1,29 +1,32 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="form">
-  <div>
-    <label>Email:</label>
-    <input type="email" formControlName="email">
-  </div>
-  <div>
-    <label>Username:</label>
-    <input type="text" formControlName="username">
-  </div>
-  <div>
-    <label>password:</label>
-    <input type="password" formControlName="password">
-  </div>
-  <button type="submit">register</button>
+<form (ngSubmit)="onSubmit()" [formGroup]="form" fxLayout="column" fxLayoutAlign="center center" style="margin-bottom: 15px">
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Username</mat-label>
+    <input matInput formControlName="username">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>password</mat-label>
+    <input matInput formControlName="password">
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">register</button>
 </form>
-<hr>
-<form (ngSubmit)="onSubmitVerify()" [formGroup]="formVerify">
-  <div>
-    <label>Email:</label>
-    <input type="email" formControlName="email">
-  </div>
-  <div>
-    <label>pin:</label>
-    <input type="text" formControlName="verifyId">
-  </div>
-  <button type="submit">verify</button>
+
+<mat-divider></mat-divider>
+
+<form (ngSubmit)="onSubmitVerify()" [formGroup]="formVerify" fxLayout="column" fxLayoutAlign="center center" style="margin-top: 15px">
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>pin</mat-label>
+    <input matInput formControlName="verifyId">
+  </mat-form-field>
+  <button mat-raised-button color="accent" type="submit">verify</button>
 </form>
+
 
 

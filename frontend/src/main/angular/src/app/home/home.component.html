@@ -1,1 +1,12 @@
-<!--<p>{{}}</p>-->
+<div fxLayout fxLayoutAlign="center center">
+  <button mat-button color="primary" routerLink="/game">
+    <mat-icon>outlined_flag</mat-icon>
+    start game
+  </button>
+  <button mat-button color="accent" routerLink="/share"
+          (click)=triggerOauth()>
+    <mat-icon>share</mat-icon>
+    share game
+  </button>
+</div>
+

@@ -27,9 +27,9 @@ public class BackendApplication {
             userService.saveRole(new Role(null, "ROLE_ADMIN"));
             userService.saveRole(new Role(null, "ROLE_SUPER_ADMIN"));
 
-            userService.saveUser(new User(null, "pipi", "1234", "pipi@gmail.com", true, new ArrayList<>()));
-            userService.saveUser(new User(null, "haihai", "1234", "haihai@gmail.com",true, new ArrayList<>()));
-            userService.saveUser(new User(null, "jinro", "1234", "jinro@gmail.com", false, new ArrayList<>()));
+            userService.saveUser(new User(null, "pipi", "1234", "pipi@gmail.com", true, new ArrayList<>(), null));
+            userService.saveUser(new User(null, "haihai", "1234", "haihai@gmail.com",true, new ArrayList<>(), null));
+            userService.saveUser(new User(null, "jinro", "1234", "jinro@gmail.com", false, new ArrayList<>(), null));
 
             userService.addRoleToUser("pipi", "ROLE_USER");
             userService.addRoleToUser("pipi", "ROLE_ADMIN");

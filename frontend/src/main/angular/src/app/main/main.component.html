@@ -1,26 +1,44 @@
-<div id="main-content" class="container">
+<div fxLayout="row" fxLayoutAlign="end">
+  <app-singleplayergame style="object-position: top left; flex: 1 1 auto"></app-singleplayergame>
+  <div fxFlex="30">
+    <button mat-raised-button color="primary" (click)="connect()" type="button" style="margin: 5px">Join Chat</button>
+    <button mat-raised-button color="accent" (click)="disconnect()" type="button" [disabled]="isConnected">Quit Chat
+    </button>
 
 
-  <label>WebSocket connection:</label>
-  <button (click)="connect()" class="btn btn-default" type="button">Connect</button>
-  <button (click)="disconnect()" class="btn btn-default" type="button" [disabled]="isConnected">Disconnect</button>
-
-  <div class="col-md-6">
-    <form (ngSubmit)="sendMessage()" [formGroup]="form">
+    <form (ngSubmit)="sendMessage()" [formGroup]="form" fxLayout="column">
+      <mat-form-field appearance="fill">
+        <mat-label>message</mat-label>
+        <textarea matInput formControlName="message" cols="30" rows="10"
+                  style="background-color: darkgray; border-radius: 3px"></textarea>
+      </mat-form-field>
       <div>
-        <label>message:</label>
-        <input type="text" formControlName="message">
+        <span fxFlex></span>
+        <button mat-raised-button color="primary" type="submit" style="width: 30px; margin: 5px">Send</button>
       </div>
-      <button type="submit">send</button>
     </form>
+
+    <p>chat:</p>
+    <li *ngFor="let msg of receivedMsgs"
+        style="border: #000066 solid 2px; border-radius: 3px; list-style-type: none; margin: 0px; padding: 0px">
+      <ul>{{msg.user}} : {{msg.message}}</ul>
+    </li>
   </div>
-
-  <li *ngFor="let msg of receivedMsgs">
-    <ul>{{msg}}</ul>
-  </li>
-
-<!--  <app-game></app-game>-->
-  <app-singleplayergame></app-singleplayergame>
-
 </div>
+
+<table style="width: 30%; margin-top: 10px">
+  <tr>
+    <th>Score</th>
+    <th>Date</th>
+  </tr>
+  <tr *ngFor="let score of oldScores">
+    <td>{{score.score}}</td>
+    <td>{{score.time| date:'shortTime'}}</td>
+  </tr>
+</table>
+
+
+
+
+
 

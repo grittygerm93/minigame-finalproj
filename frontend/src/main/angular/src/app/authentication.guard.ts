@@ -16,6 +16,8 @@ export class AuthenticationGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
+    console.log("in guard start")
+
     if(state.url == "/login" || state.url =='/register') {
       return true;
     }
@@ -30,8 +32,10 @@ export class AuthenticationGuard implements CanActivate {
     }
 
     let token = sessionStorage.getItem('access-token');
+    console.log("in guard")
 
     if(!token) {
+      console.log("in guard")
       return this.router.parseUrl('/login');
     }
 

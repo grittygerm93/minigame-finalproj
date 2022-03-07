@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Observable, Subject} from "rxjs";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {tokens} from "./models";
+import {Subject} from "rxjs";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {link, link1, tokens} from "./models";
 import {Router} from "@angular/router";
 
 @Injectable({
@@ -11,12 +11,14 @@ export class AuthService {
 
   authObs = new Subject();
   errorMsg: string;
+  user: string
 
   constructor(private http: HttpClient, private router: Router) {
   }
 
   login(username: string, password: string) {
     const userDetails = {'username': username, 'password': password}
+    this.user = username;
 
     let body = new URLSearchParams();
     body.set('username', username);
@@ -104,4 +106,20 @@ export class AuthService {
   //   //
   //   sessionStorage.setItem('access-token', sessionStorage.getItem('refresh-token'));
   // }
+  authorizeGoogleOauth() {
+    // const headers = {responseType: 'text'}
+    let params = new HttpParams()
+      .set('redirectUrl', 'http://localhost:4200/share');
+    console.log(params.toString())
+    this.http.get<link>('/api/authorizationCode', {params}).subscribe(resp => {
+      window.location.href = resp.link;
+    //  todo make the oauthauthorize trigger on it's own...
+    });
+  }
+
+  oauthAuthorize(code: any) {
+    const body = {code: code, redirectUrl: 'http://localhost:4200/share'}
+    return this.http.post<link1>('/api/token',
+      body)
+  }
 }

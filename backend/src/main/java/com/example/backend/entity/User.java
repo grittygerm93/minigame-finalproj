@@ -21,6 +21,13 @@ public class User {
     private String password;
     private String email;
     private boolean enabled;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
+    @JoinColumn(name = "googleapi_id", referencedColumnName = "id")
+    private GoogleApi googleApi;
+
+
 }

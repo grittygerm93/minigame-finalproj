@@ -28,6 +28,10 @@ export class SingleplayergameComponent implements OnInit {
       physics: {
         default: 'arcade',
         arcade: {gravity: {y: 300}}
+      },
+      scale: {
+        parent: 'mygame',
+        autoCenter: Phaser.Scale.CENTER_BOTH
       }
     };
     this.gameSvcfield = gameSvc;
@@ -206,6 +210,7 @@ export class GameScene extends Phaser.Scene {
 
     this.scene.launch('main');
     this.scene.stop();
+    this.context.gameSvcfield.storeScore(this.score);
   }
 
   // sendGameEvent(gameEvent: string) : void

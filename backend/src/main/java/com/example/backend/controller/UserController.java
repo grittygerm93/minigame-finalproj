@@ -113,7 +113,7 @@ public class UserController {
                 .path("/api/register")
                 .toUriString());
 
-        User user = new User(null, newUser.getUsername(), newUser.getPassword(), newUser.getEmail(), false, new ArrayList<>());
+        User user = new User(null, newUser.getUsername(), newUser.getPassword(), newUser.getEmail(), false, new ArrayList<>(), null);
         User savedUser = null;
         try {
             savedUser = userService.saveUser(user);
